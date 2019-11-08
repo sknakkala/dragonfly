@@ -4,8 +4,8 @@ pipeline{
     stage("checkout") {
       steps {
         git (
-          branch: 'master'
-          credentialsId: 'b6a3921a-e436-4dca-a528-1504cadf12b0'
+          branch: 'master',
+          credentialsId: 'b6a3921a-e436-4dca-a528-1504cadf12b0',
           ur: 'git@github.com:sknakkala/dragonfly.git'
         )
       }
