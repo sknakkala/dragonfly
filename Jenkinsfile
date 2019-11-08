@@ -1,12 +1,16 @@
 pipeline{
-  agent {lable: "any"}
+  agent {
+    node {
+      label: "any"
+    }
+  }
   stages {
     stage("checkout") {
       steps {
         git (
           branch: 'master',
           credentialsId: 'b6a3921a-e436-4dca-a528-1504cadf12b0',
-          ur: 'git@github.com:sknakkala/dragonfly.git'
+          url: 'git@github.com:sknakkala/dragonfly.git'
         )
       }
     }
