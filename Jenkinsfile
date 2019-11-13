@@ -8,6 +8,7 @@ pipeline{
   environment {
     registry = "imthekrish/dragonfly"
     registryCredential = 'dockerhub'
+    dockerImage = ''
   }
 
   stages {
@@ -21,10 +22,20 @@ pipeline{
       }
     }
 
-    stage("build/deploy docker") {
+    stage("build docker image") {
       steps{
         script {
-          docker.build registry + ":$BUILD_NUMBER"
+          dockerImage = docker.build registry + ":$BUILD_NUMBER"
+        }
+      }
+    }
+
+    stage("deploy docker image") {
+      steps {
+        script {
+          docker.withRegistry( '', registryCredential ) {
+            dockerImage.push()
+          }
         }
       }
     }
