@@ -4,6 +4,12 @@ pipeline{
       label "docker"
     }
   }
+
+  environment {
+    registry = "imthekrish/dragonfly"
+    registryCredential = 'dockerhub'
+  }
+
   stages {
     stage("checkout") {
       steps {
@@ -14,9 +20,12 @@ pipeline{
         )
       }
     }
-    stage("build docker image"){
+
+    stage("build/deploy docker") {
       steps{
-        sh "docker build . -t dragon-app"
+        script {
+          docker.build registry + ":$BUILD_NUMBER"
+        }
       }
     }
   }
