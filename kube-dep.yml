@@ -13,7 +13,7 @@ spec:
   template:
     metadata:
       labels:
-        app: dragonfly:latest
+        app: dragonfly
     spec:
       containers:
       - name: dragonfly
